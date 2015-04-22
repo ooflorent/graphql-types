@@ -85,10 +85,14 @@ export class Query extends Node {
   }
 
   static fromJSON(data) {
-    const [ type, action, args = [], fields = [], fragments = [] ] = data
+    let [ type, action, args, fields, fragments ] = data
     if (type !== NodeType.QUERY) {
       throw new Error('Expected query descriptor')
     }
+
+    if (!args) args = []
+    if (!fields) fields = []
+    if (!fragments) fragments = []
 
     return new Query(action, args, fields.map(Field.fromJSON), fragments.map(Fragment.fromJSON))
   }
@@ -108,11 +112,14 @@ export class Fragment extends Node {
     return pack([ NodeType.FRAGMENT, this.name, this.fields, this.fragments ])
   }
 
-  fromJSON(data) {
-    const [ type, name, fields = [], fragments = [] ] = data
+  static fromJSON(data) {
+    let [ type, name, fields, fragments ] = data
     if (type !== NodeType.FRAGMENT) {
       throw new Error('Expected fragment descriptor')
     }
+
+    if (!fields) fields = []
+    if (!fragments) fragments = []
 
     return new Fragment(name, fields.map(Field.fromJSON), fragments.map(Fragment.fromJSON))
   }
@@ -137,17 +144,21 @@ export class Field extends Node {
   }
 
   static fromJSON(data) {
-    const [ type, name, fields = [], fragments = [], calls = [] ] = data
+    let [ type, name, fields, fragments, calls ] = data
     if (type !== NodeType.FIELD) {
       throw new Error('Expected field descriptor')
     }
+
+    if (!fields) fields = []
+    if (!fragments) fragments = []
+    if (!calls) calls = []
 
     return new Field(name, fields.map(Field.fromJSON), fragments.map(Fragment.fromJSON), calls.map(Call.fromJSON))
   }
 }
 
 export class Call {
-  constructor(name, args) {
+  constructor(name, args = []) {
     this.name = name
     this.args = args
   }
@@ -161,10 +172,12 @@ export class Call {
   }
 
   static fromJSON(data) {
-    const [ type, name, args = [] ] = data
+    let [ type, name, args ] = data
     if (type !== NodeType.CALL) {
       throw new Error('Expected call descriptor')
     }
+
+    if (!args) args = []
 
     return new Call(name, args)
   }
