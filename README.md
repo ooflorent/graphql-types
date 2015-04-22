@@ -18,8 +18,8 @@ const fragment = new GraphQL.Fragment('Viewer', [
 
 const query = new GraphQL.Query('viewer', [4], [
   new GraphQL.Field('id'),
-  new GraphQL.Field('profile_picture', [ new GraphQL.Call('site', ['mobile']) ], [
+  new GraphQL.Field('profile_picture', [
     new GraphQL.Field('uri'),
-  ]),
-], [fragment])
+  ], null, [ new GraphQL.Call('site', ['mobile']) ]),
+], [ fragment ])
 ```
