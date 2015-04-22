@@ -1,7 +1,7 @@
 {
   "name": "graphql-types",
   "version": "1.0.0",
-  "description": "GraphQL types",
+  "description": "Experimental Facebook's GraphQL type definitions",
   "author": "Florent Cailhol <florent.cailhol@gmail.com>",
   "license": "MIT",
   "repository": "ooflorent/graphql-parser",
