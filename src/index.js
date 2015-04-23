@@ -28,9 +28,9 @@ export const NodeType = {
 }
 
 class Node {
-  constructor(fields = [], fragments = []) {
-    this.fields = fields
-    this.fragments = fragments
+  constructor(fields, fragments) {
+    this.fields = fields || []
+    this.fragments = fragments || []
   }
 
   static _getFields(nodes) {
@@ -70,7 +70,7 @@ class Node {
 }
 
 export class Query extends Node {
-  constructor(action, args = [], fields, fragments) {
+  constructor(action, args, fields, fragments) {
     super(fields, fragments)
     this.rootCall = action
     this.rootNode = new Call(action, args)
@@ -126,10 +126,10 @@ export class Fragment extends Node {
 }
 
 export class Field extends Node {
-  constructor(name, fields, fragments, calls = []) {
+  constructor(name, fields, fragments, calls) {
     super(fields, fragments)
     this.name = name
-    this.calls = calls
+    this.calls = calls || []
   }
 
   toString() {
@@ -158,9 +158,9 @@ export class Field extends Node {
 }
 
 export class Call {
-  constructor(name, args = []) {
+  constructor(name, args) {
     this.name = name
-    this.args = args
+    this.args = args || []
   }
 
   toString() {
