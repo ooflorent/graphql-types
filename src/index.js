@@ -27,13 +27,13 @@ export const NodeType = {
   CALL: 4,
 }
 
-class Node {
+export class Node {
   constructor(fields, fragments) {
     this.fields = fields || []
     this.fragments = fragments || []
   }
 
-  static _getFields(nodes) {
+  static getFields(nodes) {
     const fieldMap = {}
 
     for (let iterations = 0; nodes.length > 0; iterations++) {
@@ -60,7 +60,7 @@ class Node {
   }
 
   static _toString(nodes) {
-    const fields = Node._getFields(nodes)
+    const fields = Node.getFields(nodes)
     if (fields.length === 0) {
       return ''
     }
