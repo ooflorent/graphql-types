@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.1.0
+
+* Fix repository's url
+* Export `Node.getFields()`
+
 ## 1.0.2
 
 * Fix default values assignments
