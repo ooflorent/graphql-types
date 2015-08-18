@@ -163,8 +163,17 @@ export class Call {
     this.args = args || []
   }
 
+  argsString() {
+    if(util.isArray(this.args)){
+      return this.args.map(String).join(',')
+    }
+    return Object.keys(this.args).map((key) =>{
+      return key + ":" + this.args[key]
+    }).join(",")
+  }
+
   toString() {
-    return `${ this.name }(${ this.args.map(String).join(',') })`
+    return `${ this.name }(${ this.argsString()})`
   }
 
   toJSON() {
